@@ -4,12 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 10</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Cuisine</title>
   </head>
   <body>
-    <input type="text" id="search-box" />
-    <ul class="country-list"></ul>
-    <div class="country-info"></div>
+    <h1>Cuisine</h1>
+    <form action="submit" class="js-search">
+      <label>
+        Recipe name :
+        <input type="text" name="query" />
+      </label>
+      <label
+        >Cuisine
+        <select name="cuisine">
+          <option value="african">African</option>
+          <option value="american">American</option>
+          <option value="british">British</option>
+          <option value="british">British</option>
+          <option value="cajun">Cajun</option>
+          <option value="caribbean">Caribbean</option>
+          <option value="chinese">Chinese</option>
+          <option value="eastern">Eastern</option>
+          <option value="european">European</option>
+          <option value="french">French</option>
+        </select>
+      </label>
+      <button type="submit">Search</button>
+    </form>
+    <ul class="cuisine-list"></ul>
+    <div class="cuisine-info"></div>
 
     <script src="index.js" type="module"></script>
   </body>
