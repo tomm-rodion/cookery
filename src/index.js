@@ -28,16 +28,24 @@ function markupCuisine(data) {
       return `<li class="resipe">
           <img src="${item.image}" alt="${item.title}" />
           <h2 class="title-risipe">${item.title}</h2>
+          <a href="${item.sourceUrl}" target = "_blank">Link in ricept</a>
+          <p>${item.summary}<p/>
         </li>`;
     })
     .join('');
   console.log(markup);
-  list.insertAdjacentHTML('beforeend', markup);
+  if (markup === '' || markup === undefined) {
+    alert(
+      'Упс..Нажаль такої страви не знайдено, спробуйте іншу назву страви! '
+    );
+    return;
+  }
+  list.innerHTML = markup;
 }
 
 function dishFetch(name, valueCuisine) {
   return fetch(
-    `${BASE_URL}?apiKey=${API_KEY}&query=${name}&cuisine=${valueCuisine}`
+    `${BASE_URL}?apiKey=${API_KEY}&query=${name}&cuisine=${valueCuisine}&addRecipeInformation=true`
   )
     .then(res => {
       if (!res.ok) {
