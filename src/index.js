@@ -9,13 +9,15 @@ function onSearch(evt) {
     cuisine: { value: valueCuisine },
   } = evt.currentTarget.elements;
   if (!valueQuery) {
-    alert('Поле назви страви пусте!');
+    alert('Поле пошуку по назві страви пусте!');
     return;
   }
-  dishFetch(valueQuery, valueCuisine).then(data => {
-    markupCuisine(data);
-    console.dir(data.results);
-  });
+  dishFetch(valueQuery, valueCuisine)
+    .then(data => {
+      console.dir(data.results);
+      markupCuisine(data);
+    })
+    .catch(error => console.error(error.message));
 }
 
 const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
@@ -43,15 +45,14 @@ function markupCuisine(data) {
   list.innerHTML = markup;
 }
 
-function dishFetch(name, valueCuisine) {
-  return fetch(
+async function dishFetch(name, valueCuisine) {
+  const resp = await fetch(
     `${BASE_URL}?apiKey=${API_KEY}&query=${name}&cuisine=${valueCuisine}&addRecipeInformation=true`
-  )
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(res.statusText);
-      }
-      return res.json();
-    })
-    .catch(err => console.error(err));
+  );
+
+  if (!resp.ok) {
+    throw new Error(resp.statusText);
+  }
+  const data = await resp.json();
+  return data;
 }
