@@ -9,7 +9,7 @@ function onSearch(evt) {
     cuisine: { value: valueCuisine },
   } = evt.currentTarget.elements;
   if (!valueQuery) {
-    alert('Поле пошуку по назві страви пусте!');
+    alert('The search field by the name of the dish is empty!');
     return;
   }
   dishFetch(valueQuery, valueCuisine)
@@ -27,10 +27,10 @@ function markupCuisine(data) {
   console.log(typeof data.results);
   const markup = data.results
     .map(item => {
-      return `<li class="resipe">
+      return `<li class="recipe">
           <img src="${item.image}" alt="${item.title}" />
-          <h2 class="title-risipe">${item.title}</h2>
-          <a href="${item.sourceUrl}" target = "_blank">Link in ricept</a>
+          <h2 class="title-recipe">${item.title}</h2>
+          <a href="${item.sourceUrl}" target = "_blank">Link in recipe</a>
           <p>${item.summary}<p/>
         </li>`;
     })
@@ -38,7 +38,7 @@ function markupCuisine(data) {
   console.log(markup);
   if (markup === '' || markup === undefined) {
     alert(
-      'Упс..Нажаль такої страви не знайдено, спробуйте іншу назву страви! '
+      'Oops..Unfortunately, no such dish was found, try another dish name! '
     );
     return;
   }
